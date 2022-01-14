@@ -31,5 +31,12 @@ namespace Blog.Web.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EditCategory([FromBody] EditCategoryRequest request)
+        {
+            var response = await _mediator.Send(new EditCategoryCommand(request));
+            return Ok(response);
+        }
     }
 }
