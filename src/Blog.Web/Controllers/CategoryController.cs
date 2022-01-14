@@ -1,7 +1,9 @@
 ﻿using Blog.BL.Commands.Category;
+using Blog.BL.Queries.Category;
 using Blog.Models.Requests.Category;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Blog.Web.Controllers
@@ -14,6 +16,14 @@ namespace Blog.Web.Controllers
         public CategoryController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCategoryById([FromQuery] Guid id)
+        {
+            var response = await _mediator.Send(new GetCategoryByIdQuery(id));
+
+            return Ok(response);
         }
 
         [HttpPost]
@@ -36,6 +46,7 @@ namespace Blog.Web.Controllers
         public async Task<IActionResult> EditCategory([FromBody] EditCategoryRequest request)
         {
             var response = await _mediator.Send(new EditCategoryCommand(request));
+
             return Ok(response);
         }
     }
