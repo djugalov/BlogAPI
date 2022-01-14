@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
 
 namespace Blog.Web
 {
@@ -24,6 +25,8 @@ namespace Blog.Web
             services.AddDbContext<BlogDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("BlogDbContext")));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddControllers();
+            services.AddMediatR(typeof(Web.Controllers.CategoryController));
+            services.AddProjectServices();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog.Web", Version = "v1" });
