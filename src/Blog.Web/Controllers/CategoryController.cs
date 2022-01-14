@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Blog.BL.Commands.Category;
+using Blog.Models.Requests.Category;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Blog.Web.Controllers
 {
@@ -6,10 +10,17 @@ namespace Blog.Web.Controllers
     [ApiController]
     public class CategoryController : Controller
     {
-        [HttpPost]
-        public IActionResult AddCategory()
+        private readonly IMediator _mediator;
+        public CategoryController(IMediator mediator)
         {
-            return Ok();
+            _mediator = mediator;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCategory([FromBody] AddCategoryRequest request)
+        {
+            var response = await _mediator.Send(new AddCategoryCommand(request));
+            return Ok(response);
         }
     }
 }
