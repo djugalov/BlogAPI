@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Blog.Models.DTOs.Category
 {
-    public class EditedCategoryDto
+    public class BaseCategoryDto
     {
         [JsonPropertyName("id")]
         public Guid Id { get; set; }

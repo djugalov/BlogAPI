@@ -7,7 +7,7 @@ namespace Blog.Models.Responses.Category
     public class EditCategoryResponse
     {
         [JsonPropertyName("category")]
-        public EditedCategoryDto Category { get; set; }
+        public BaseCategoryDto Category { get; set; }
 
         [JsonPropertyName("isSuccess")]
         public bool IsSuccess { get; set; }
