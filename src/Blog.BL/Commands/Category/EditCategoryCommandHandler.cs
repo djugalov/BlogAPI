@@ -40,7 +40,7 @@ namespace Blog.BL.Commands.Category
             {
                 IsSuccess = true,
                 EditCategoryResponseMessage = "Category was edited successfully",
-                Category = new Models.DTOs.Category.EditedCategoryDto
+                Category = new Models.DTOs.Category.BaseCategoryDto
                 {
                     Id = category.Id,
                     Name = category.Name
