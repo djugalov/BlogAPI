@@ -20,6 +20,15 @@ namespace Blog.Web.Controllers
         public async Task<IActionResult> AddCategory([FromBody] AddCategoryRequest request)
         {
             var response = await _mediator.Send(new AddCategoryCommand(request));
+
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCategory([FromBody] DeleteCategoryRequest request)
+        {
+            var response = await _mediator.Send(new DeleteCategoryCommand(request));
+
             return Ok(response);
         }
     }
