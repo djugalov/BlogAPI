@@ -26,6 +26,14 @@ namespace Blog.Web.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var response = await _mediator.Send(new GetAllCategoriesQuery());
+
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddCategory([FromBody] AddCategoryRequest request)
         {
