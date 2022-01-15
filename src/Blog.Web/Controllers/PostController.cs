@@ -1,4 +1,5 @@
 ﻿using Blog.BL.Commands.Post;
+using Blog.BL.Queries.Post;
 using Blog.Models.Requests.Post;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,14 @@ namespace Blog.Web.Controllers
         public PostController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetPostById([FromQuery] GetPostByIdRequest request)
+        {
+            var response = await _mediator.Send(new GetPostByIdQuery(request));
+
+            return Ok(response);
         }
 
         [HttpPost]
