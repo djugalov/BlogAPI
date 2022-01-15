@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Requests\Post\DeletePostRequest.cs~RF7a054ef.TMP" />
+  </ItemGroup>
+
 </Project>

@@ -30,6 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void AddPostServices(IServiceCollection services)
         {
             services.AddTransient<IRequestHandler<CreatePostCommand, CreatePostResponse>, CreatePostCommandHandler>();
+            services.AddTransient<IRequestHandler<DeletePostCommand, DeletePostResponse>, DeletePostCommandHandler>();
         }
     }
 }
