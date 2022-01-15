@@ -1,4 +1,5 @@
-﻿using Blog.BL.Commands.Category;
+﻿using Blog.BL.Authorization.Attributes;
+using Blog.BL.Commands.Category;
 using Blog.BL.Queries.Category;
 using Blog.Models.Requests.Category;
 using MediatR;
@@ -34,6 +35,7 @@ namespace Blog.Web.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddCategory([FromBody] AddCategoryRequest request)
         {
@@ -42,6 +44,7 @@ namespace Blog.Web.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> DeleteCategory([FromBody] DeleteCategoryRequest request)
         {
@@ -50,6 +53,7 @@ namespace Blog.Web.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> EditCategory([FromBody] EditCategoryRequest request)
         {
