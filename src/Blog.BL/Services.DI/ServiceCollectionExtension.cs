@@ -1,8 +1,10 @@
-﻿using Blog.BL.Commands.Category;
+﻿using Blog.BL.Commands.ApplicationUser;
+using Blog.BL.Commands.Category;
 using Blog.BL.Commands.Post;
 using Blog.BL.Helpers;
 using Blog.BL.Queries.Category;
 using Blog.BL.Queries.Post;
+using Blog.Models.Responses.ApplicationUser;
 using Blog.Models.Responses.Category;
 using Blog.Models.Responses.Post;
 using MediatR;
@@ -18,6 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
             AddPostServices(services);
 
             AddHelperServices(services);
+
+            AddApplicationUserServices(services);
 
             return services;
         }
@@ -42,6 +46,11 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void AddHelperServices(IServiceCollection services)
         {
             services.AddTransient<IBase64FileConverter, Base64FileConverter>();
+        }
+
+        private static void AddApplicationUserServices(IServiceCollection services)
+        {
+            services.AddTransient<IRequestHandler<RegisterUserCommand, RegisterUserResponse>, RegisterUserCommandHandler>();
         }
     }
 }
