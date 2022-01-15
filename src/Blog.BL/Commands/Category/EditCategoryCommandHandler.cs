@@ -17,7 +17,7 @@ namespace Blog.BL.Commands.Category
 
         public async Task<EditCategoryResponse> Handle(EditCategoryCommand editCategoryCommand, CancellationToken cancellationToken)
         {
-            var category = await _context.Categories.FindAsync(editCategoryCommand.Category.Id, CancellationToken.None);
+            var category = await _context.Categories.FindAsync(new object[] { editCategoryCommand.Category.Id }, CancellationToken.None);
 
             if(category == null)
             {

@@ -16,7 +16,7 @@ namespace Blog.BL.Commands.Category
 
         public async Task<DeleteCategoryResponse> Handle(DeleteCategoryCommand deleteCategoryCommand, CancellationToken cancellationToken)
         {
-            var category = await _context.Categories.FindAsync(deleteCategoryCommand.Request.Id, CancellationToken.None);
+            var category = await _context.Categories.FindAsync(new object[] { deleteCategoryCommand.Request.Id }, CancellationToken.None);
 
             if (category != null)
             {
