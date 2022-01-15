@@ -23,5 +23,14 @@ namespace Blog.Web.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] LoginUserRequest request)
+        {
+            //Testy/Test123!
+            var response = await _mediator.Send(new LoginUserCommand(request));
+
+            return Ok(response);
+        }
     }
 }
