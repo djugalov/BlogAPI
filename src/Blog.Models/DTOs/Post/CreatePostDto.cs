@@ -14,5 +14,8 @@ namespace Blog.Models.DTOs.Post
         [JsonPropertyName("authorId")]
         public Guid AuthorId { get; set; }
 
+        [JsonPropertyName("image")]
+        public string Image { get; set; }
+
     }
 }

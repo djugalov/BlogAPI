@@ -1,4 +1,5 @@
-﻿using Blog.Data;
+﻿using Blog.BL.Helpers;
+using Blog.Data;
 using Blog.Models.Responses.Post;
 using MediatR;
 using System;
@@ -10,9 +11,11 @@ namespace Blog.BL.Commands.Post
     public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, CreatePostResponse>
     {
         private readonly BlogDbContext _context;
-        public CreatePostCommandHandler(BlogDbContext context)
+        private readonly IBase64FileConverter _fileConverter;
+        public CreatePostCommandHandler(BlogDbContext context, IBase64FileConverter fileConverter)
         {
             _context = context;
+            _fileConverter = fileConverter;
         }
         public async Task<CreatePostResponse> Handle(CreatePostCommand createPostCommand, CancellationToken cancellationToken)
         {
@@ -31,13 +34,17 @@ namespace Blog.BL.Commands.Post
             {
                 Title = createPostCommand.Request.Post.Title,
                 Content = createPostCommand.Request.Post.Content,
+                Image = new Data.DbModels.PostImage
+                {
+                    Image = _fileConverter.Read(createPostCommand.Request.Post.Image)
+                },
                 Author = author,
                 PublishedOn = DateTime.UtcNow
             };
 
             var createdPost = await _context.Posts.AddAsync(post);
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(CancellationToken.None);
 
             return new CreatePostResponse
             {
@@ -46,7 +53,8 @@ namespace Blog.BL.Commands.Post
                 {
                     Title = createdPost.Entity.Title,
                     Content = createdPost.Entity.Content,
-                    AuthorId = createdPost.Entity.Author.Id
+                    AuthorId = createdPost.Entity.Author.Id,
+                    Image = createPostCommand.Request.Post.Image
                 },
                 IsSuccess = true,
                 ResponseMessage = "Post was added successfully"
