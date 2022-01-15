@@ -10,9 +10,6 @@ namespace Blog.Data.DbModels
         [Column("id")]
         public Guid Id { get; set; }
 
-        [ForeignKey("post_id")]
-        public virtual Post Post { get; set; }
-
         [Column("image")]
         public byte[] Image { get; set; }
     }
