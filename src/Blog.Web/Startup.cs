@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
+using Blog.BL.Helpers;
 
 namespace Blog.Web
 {
@@ -27,6 +28,7 @@ namespace Blog.Web
             services.AddControllers();
             services.AddMediatR(typeof(Web.Controllers.CategoryController));
             services.AddProjectServices();
+            services.Configure<AppSettings>(Configuration.GetSection(AppSettings.Settings));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog.Web", Version = "v1" });
