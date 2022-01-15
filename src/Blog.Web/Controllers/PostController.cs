@@ -24,5 +24,13 @@ namespace Blog.Web.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePost([FromBody] DeletePostRequest request)
+        {
+            var response = await _mediator.Send(new DeletePostCommand(request));
+
+            return Ok(response);
+        }
     }
 }
