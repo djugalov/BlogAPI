@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -38,9 +39,36 @@ namespace Blog.BL.Authorization
             return serializedToken;
         }
 
-        public Guid ValidateToken(string token)
+        public string ValidateToken(string token)
         {
-            throw new NotImplementedException();
+            if (token == null)
+            {
+                return null;
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var tokenGenerationKey = Encoding.ASCII.GetBytes(_appSettings.AuthSecret);
+
+            try
+            {
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(tokenGenerationKey),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var userId = ((JwtSecurityToken)validatedToken).Claims.First(x => x.Type == "id").Value;
+
+                return userId;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

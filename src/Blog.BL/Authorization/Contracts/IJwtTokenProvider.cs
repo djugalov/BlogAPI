@@ -7,6 +7,6 @@ namespace Blog.BL.Authorization.Contracts
     {
         public string GenerateToken(ApplicationUser user);
 
-        public Guid ValidateToken(string token);
+        public string ValidateToken(string token);
     }
 }
