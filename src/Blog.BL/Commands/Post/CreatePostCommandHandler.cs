@@ -19,7 +19,7 @@ namespace Blog.BL.Commands.Post
         }
         public async Task<CreatePostResponse> Handle(CreatePostCommand createPostCommand, CancellationToken cancellationToken)
         {
-            var author = await _context.Users.FindAsync(createPostCommand.Request.Post.AuthorId);
+            var author = await _context.Users.FindAsync(new object[] { createPostCommand.Request.Post.AuthorId }, CancellationToken.None);
 
             if(author == null)
             {
@@ -42,7 +42,7 @@ namespace Blog.BL.Commands.Post
                 PublishedOn = DateTime.UtcNow
             };
 
-            var createdPost = await _context.Posts.AddAsync(post);
+            var createdPost = await _context.Posts.AddAsync(post, CancellationToken.None);
 
             await _context.SaveChangesAsync(CancellationToken.None);
 

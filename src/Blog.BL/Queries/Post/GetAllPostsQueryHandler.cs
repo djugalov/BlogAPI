@@ -31,7 +31,7 @@ namespace Blog.BL.Queries.Post
                     Image = _fileConverter.Write(x.Image.Image),
                     PublishedOn = x.PublishedOn
                 })
-                .ToListAsync();
+                .ToListAsync(CancellationToken.None);
 
             return new GetAllPostsResponse
             {
