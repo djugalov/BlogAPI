@@ -26,6 +26,14 @@ namespace Blog.Web.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllPosts()
+        {
+            var response = await _mediator.Send(new GetAllPostQuery());
+
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreatePost([FromBody] CreatePostRequest request)
         {

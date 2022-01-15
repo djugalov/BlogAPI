@@ -36,6 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<IRequestHandler<CreatePostCommand, CreatePostResponse>, CreatePostCommandHandler>();
             services.AddTransient<IRequestHandler<DeletePostCommand, DeletePostResponse>, DeletePostCommandHandler>();
             services.AddTransient<IRequestHandler<GetPostByIdQuery, GetPostByIdResponse>, GetPostByIdQueryHandler>();
+            services.AddTransient<IRequestHandler<GetAllPostQuery, GetAllPostsResponse>, GetAllPostsQueryHandler>();
         }
 
         private static void AddHelperServices(IServiceCollection services)
