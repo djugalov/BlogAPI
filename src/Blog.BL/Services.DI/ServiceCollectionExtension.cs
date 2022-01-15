@@ -1,4 +1,6 @@
-﻿using Blog.BL.Commands.ApplicationUser;
+﻿using Blog.BL.Authorization;
+using Blog.BL.Authorization.Contracts;
+using Blog.BL.Commands.ApplicationUser;
 using Blog.BL.Commands.Category;
 using Blog.BL.Commands.Post;
 using Blog.BL.Helpers;
@@ -22,6 +24,8 @@ namespace Microsoft.Extensions.DependencyInjection
             AddHelperServices(services);
 
             AddApplicationUserServices(services);
+
+            AddAutorizationServices(services);
 
             return services;
         }
@@ -51,6 +55,12 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void AddApplicationUserServices(IServiceCollection services)
         {
             services.AddTransient<IRequestHandler<RegisterUserCommand, RegisterUserResponse>, RegisterUserCommandHandler>();
+            services.AddTransient<IRequestHandler<LoginUserCommand, LoginUserResponse>, LoginUserCommandHandler>();
+        }
+
+        private static void AddAutorizationServices(IServiceCollection services)
+        {
+            services.AddTransient<IJwtTokenProvider, JwtTokenProvider>();
         }
     }
 }
