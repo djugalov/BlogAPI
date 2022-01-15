@@ -28,7 +28,7 @@ namespace Blog.BL.Commands.Category
                 return new EditCategoryResponse
                 {
                     IsSuccess = false,
-                    EditCategoryResponseMessage = $"Category with the given id {editCategoryCommand.Category.Id} does not exist"
+                    ResponseMessage = $"Category with the given id {editCategoryCommand.Category.Id} does not exist"
                 };
             }
 
@@ -39,7 +39,7 @@ namespace Blog.BL.Commands.Category
             return new EditCategoryResponse
             {
                 IsSuccess = true,
-                EditCategoryResponseMessage = "Category was edited successfully",
+                ResponseMessage = "Category was edited successfully",
                 Category = new Models.DTOs.Category.BaseCategoryDto
                 {
                     Id = category.Id,

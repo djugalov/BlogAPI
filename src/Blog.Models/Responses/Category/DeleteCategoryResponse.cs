@@ -1,13 +1,8 @@
-﻿using System.Text.Json.Serialization;
+﻿using Blog.Models.Abstractions;
 
 namespace Blog.Models.Responses.Category
 {
-    public class DeleteCategoryResponse
+    public class DeleteCategoryResponse : BaseResponse
     {
-        [JsonPropertyName("isSuccess")]
-        public bool IsSuccess { get; set; }
-
-        [JsonPropertyName("responseMessage")]
-        public string DeleteCategoryResponseMessage { get; set; }
     }
 }

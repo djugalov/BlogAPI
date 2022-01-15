@@ -1,17 +1,12 @@
-﻿using Blog.Models.DTOs.Category;
+﻿using Blog.Models.Abstractions;
+using Blog.Models.DTOs.Category;
 using System.Text.Json.Serialization;
 
 namespace Blog.Models.Responses.Category
 {
-    public class GetCategoryByIdResponse
+    public class GetCategoryByIdResponse : BaseResponse
     {
         [JsonPropertyName("category")]
         public BaseCategoryDto Category { get; set; }
-
-        [JsonPropertyName("isSuccess")]
-        public bool IsSuccess { get; set; }
-
-        [JsonPropertyName("responseMessage")]
-        public string GetCategoryByIdResponseMessage { get; set; }
     }
 }

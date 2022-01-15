@@ -27,14 +27,14 @@ namespace Blog.BL.Commands.Category
                 return new DeleteCategoryResponse
                 {
                     IsSuccess = true,
-                    DeleteCategoryResponseMessage = "Category was deleted successfully"
+                    ResponseMessage = "Category was deleted successfully"
                 };
             }
 
             return new DeleteCategoryResponse
             {
                 IsSuccess = false,
-                DeleteCategoryResponseMessage = $"The provided id {deleteCategoryCommand.Request.Id} does not match any existing category"
+                ResponseMessage = $"The provided id {deleteCategoryCommand.Request.Id} does not match any existing category"
             };
         }
     }

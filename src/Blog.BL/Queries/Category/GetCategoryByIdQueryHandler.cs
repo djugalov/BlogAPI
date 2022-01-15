@@ -30,14 +30,14 @@ namespace Blog.BL.Queries.Category
                         Name = category.Name
                     },
                     IsSuccess = true,
-                    GetCategoryByIdResponseMessage = "Getting of category was successful"
+                    ResponseMessage = "Getting of category was successful"
                 };
             }
 
             return new GetCategoryByIdResponse
             {
                 IsSuccess = false,
-                GetCategoryByIdResponseMessage = $"Could not get category with the following id {request.Id}"
+                ResponseMessage = $"Could not get category with the following id {request.Id}"
             };
         }
     }
