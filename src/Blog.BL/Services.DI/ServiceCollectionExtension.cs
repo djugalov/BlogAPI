@@ -2,6 +2,7 @@
 using Blog.BL.Commands.Post;
 using Blog.BL.Helpers;
 using Blog.BL.Queries.Category;
+using Blog.BL.Queries.Post;
 using Blog.Models.Responses.Category;
 using Blog.Models.Responses.Post;
 using MediatR;
@@ -34,6 +35,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddTransient<IRequestHandler<CreatePostCommand, CreatePostResponse>, CreatePostCommandHandler>();
             services.AddTransient<IRequestHandler<DeletePostCommand, DeletePostResponse>, DeletePostCommandHandler>();
+            services.AddTransient<IRequestHandler<GetPostByIdQuery, GetPostByIdResponse>, GetPostByIdQueryHandler>();
         }
 
         private static void AddHelperServices(IServiceCollection services)
