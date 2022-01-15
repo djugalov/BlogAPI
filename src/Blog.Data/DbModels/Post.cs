@@ -21,6 +21,7 @@ namespace Blog.Data.DbModels
         [Column("title")]
         public string Title { get; set; }
 
+        [MaxLength]
         [Column("content")]
         public string Content { get; set; }
 
