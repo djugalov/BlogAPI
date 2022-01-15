@@ -19,13 +19,14 @@ namespace Blog.BL.Queries.Category
 
         public Task<GetAllCategoriesResponse> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var getAllCategoriesResponse = new GetAllCategoriesResponse();
-
-            getAllCategoriesResponse.Categories = _context.Categories.Select(x => new BaseCategoryDto
-            { 
-                Id = x.Id,
-                Name = x.Name 
-            });
+            var getAllCategoriesResponse = new GetAllCategoriesResponse
+            {
+                Categories = _context.Categories.Select(x => new BaseCategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                })
+            };
 
             return Task.FromResult(getAllCategoriesResponse);
         }

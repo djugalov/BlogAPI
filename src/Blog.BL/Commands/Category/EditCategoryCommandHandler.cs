@@ -21,7 +21,7 @@ namespace Blog.BL.Commands.Category
 
         public async Task<EditCategoryResponse> Handle(EditCategoryCommand editCategoryCommand, CancellationToken cancellationToken)
         {
-            var category = await _context.Categories.FindAsync(editCategoryCommand.Category.Id);
+            var category = await _context.Categories.FindAsync(editCategoryCommand.Category.Id, CancellationToken.None);
 
             if(category == null)
             {
@@ -34,7 +34,7 @@ namespace Blog.BL.Commands.Category
 
             category.Name = editCategoryCommand.Category.Name;
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(CancellationToken.None);
 
             return new EditCategoryResponse
             {

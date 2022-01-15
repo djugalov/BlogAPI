@@ -18,7 +18,7 @@ namespace Blog.BL.Queries.Category
 
         public async Task<GetCategoryByIdResponse> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
-            var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == request.Id);
+            var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == request.Id, CancellationToken.None);
 
             if(category != null)
             {

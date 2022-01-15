@@ -16,13 +16,13 @@ namespace Blog.BL.Commands.Category
 
         public async Task<DeleteCategoryResponse> Handle(DeleteCategoryCommand deleteCategoryCommand, CancellationToken cancellationToken)
         {
-            var category = await _context.Categories.FindAsync(deleteCategoryCommand.Request.Id);
+            var category = await _context.Categories.FindAsync(deleteCategoryCommand.Request.Id, CancellationToken.None);
 
             if (category != null)
             {
                 _context.Remove(category);
 
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(CancellationToken.None);
 
                 return new DeleteCategoryResponse
                 {
