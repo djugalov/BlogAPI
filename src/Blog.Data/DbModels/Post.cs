@@ -40,6 +40,9 @@ namespace Blog.Data.DbModels
         [Column("is_deleted")]
         public bool IsDeleted { get; set; }
 
+        [ForeignKey("post_image")]
+        public PostImage Image { get; set; }
+
         public virtual IEnumerable<Comment> Comments { get; set; }
         
         public virtual IEnumerable<PostTagMap> Tags { get; set; }
