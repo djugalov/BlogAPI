@@ -7,5 +7,7 @@ namespace Blog.BL.Helpers
         public bool CanConvert(Type objectType) =>  objectType == typeof(string);
 
         public byte[] Read(object encodedFile) => Convert.FromBase64String(encodedFile as string);
+
+        public string Write(byte[] file) => Convert.ToBase64String(file);
     }
 }

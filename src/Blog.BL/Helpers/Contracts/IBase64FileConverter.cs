@@ -7,5 +7,7 @@ namespace Blog.BL.Helpers
         public bool CanConvert(Type objectType);
 
         public byte[] Read(object encodedFile);
+
+        public string Write(byte[] file);
     }
 }
