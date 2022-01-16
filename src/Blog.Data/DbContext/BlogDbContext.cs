@@ -16,6 +16,7 @@ namespace Blog.Data
         public DbSet<PostImage> PostsImages { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<PostTagMap> PostTagMaps { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

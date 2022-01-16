@@ -1,4 +1,5 @@
-﻿using Blog.BL.Commands.Post;
+﻿using Blog.BL.Authorization.Attributes;
+using Blog.BL.Commands.Post;
 using Blog.BL.Queries.Post;
 using Blog.Models.Requests.Post;
 using MediatR;
@@ -34,6 +35,7 @@ namespace Blog.Web.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreatePost([FromBody] CreatePostRequest request)
         {
@@ -42,6 +44,7 @@ namespace Blog.Web.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> DeletePost([FromBody] DeletePostRequest request)
         {
