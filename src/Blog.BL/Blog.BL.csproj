@@ -17,8 +17,4 @@
     <ProjectReference Include="..\Blog.Models\Blog.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Queries\Comment\" />
-  </ItemGroup>
-
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Blog.BL.Authorization.Attributes;
 using Blog.BL.Commands.Comment;
+using Blog.BL.Queries.Comment;
 using Blog.Models.Requests.Comment;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,14 @@ namespace Blog.Web.Controllers
         public CommentController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllCommentsForPost([FromQuery] GetCommentsForPostRequest request)
+        {
+            var response = await _mediator.Send(new GetCommentsForPostQuery(request));
+
+            return Ok(response);
         }
 
         [Authorize]
