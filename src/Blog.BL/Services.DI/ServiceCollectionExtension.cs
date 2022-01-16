@@ -75,6 +75,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<IRequestHandler<DeleteCommentCommand, DeleteCommentResponse>, DeleteCommentCommandHandler>();
             services.AddTransient<IRequestHandler<EditCommentCommand, EditCommentResponse>, EditCommentCommandHandler>();
             services.AddTransient<IRequestHandler<GetCommentsForPostQuery, GetCommentsForPostResponse>, GetCommentsForPostQueryHandler>();
+            services.AddTransient<IRequestHandler<GetCommentByIdQuery, GetCommentByIdResponse>, GetCommentByIdQueryHandler>();
         }
     }
 }

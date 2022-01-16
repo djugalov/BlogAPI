@@ -26,6 +26,14 @@ namespace Blog.Web.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetCommentById(GetCommentByIdRequest request)
+        {
+            var response = await _mediator.Send(new GetCommentByIdQuery(request));
+
+            return Ok(response);
+        }
+
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateComment(CreateCommentRequest request)
