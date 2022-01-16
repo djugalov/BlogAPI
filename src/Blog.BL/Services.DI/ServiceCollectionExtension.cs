@@ -8,11 +8,13 @@ using Blog.BL.Helpers;
 using Blog.BL.Queries.Category;
 using Blog.BL.Queries.Comment;
 using Blog.BL.Queries.Post;
+using Blog.BL.Queries.Tag;
 using Blog.Models.Requests.Post;
 using Blog.Models.Responses.ApplicationUser;
 using Blog.Models.Responses.Category;
 using Blog.Models.Responses.Comment;
 using Blog.Models.Responses.Post;
+using Blog.Models.Responses.Tag;
 using MediatR;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -32,6 +34,8 @@ namespace Microsoft.Extensions.DependencyInjection
             AddAutorizationServices(services);
 
             AddCommentServices(services);
+
+            AddTagServices(services);
 
             return services;
         }
@@ -76,6 +80,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<IRequestHandler<EditCommentCommand, EditCommentResponse>, EditCommentCommandHandler>();
             services.AddTransient<IRequestHandler<GetCommentsForPostQuery, GetCommentsForPostResponse>, GetCommentsForPostQueryHandler>();
             services.AddTransient<IRequestHandler<GetCommentByIdQuery, GetCommentByIdResponse>, GetCommentByIdQueryHandler>();
+        }
+
+        private static void AddTagServices(IServiceCollection services)
+        {
+            services.AddTransient<IRequestHandler<GetAllTagsQuery, GetAllTagsResponse>, GetAllTagsQueryHandler>();
         }
     }
 }
