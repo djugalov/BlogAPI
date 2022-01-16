@@ -19,6 +19,14 @@ namespace Blog.Web.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetAllTagsPerPost([FromQuery] GetAllTagsPerPostRequest request)
+        {
+            var response = await _mediator.Send(new GetAllTagsPerPostQuery(request));
+
+            return Ok(response);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GetAllTags()
         {
             var response = await _mediator.Send(new GetAllTagsQuery());

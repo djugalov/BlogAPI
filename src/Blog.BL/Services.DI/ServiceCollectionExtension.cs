@@ -90,6 +90,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<IRequestHandler<DeleteTagCommand, DeleteTagResponse>, DeleteTagCommandHandler>();
             services.AddTransient<IRequestHandler<CreateTagCommand, CreateTagResponse>, CreateTagCommandHandler>();
             services.AddTransient<IRequestHandler<RemoveTagFromPostCommand, RemoveTagFromPostResponse>, RemoveTagFromPostCommandHandler>();
+            services.AddTransient<IRequestHandler<GetAllTagsPerPostQuery, GetAllTagsPerPostResponse>, GetAllTagsPerPostQueryHandler>();
         }
     }
 }
