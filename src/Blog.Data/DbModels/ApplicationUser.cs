@@ -26,6 +26,9 @@ namespace Blog.Data.DbModels
         [Column("password")]
         public string Password { get; set; }
 
+        [Column("role")]
+        public string Role { get; set; } = string.Empty;
+
         [ForeignKey("author_user_id")]
         public virtual User AuthorUser { get; set; }
     }
