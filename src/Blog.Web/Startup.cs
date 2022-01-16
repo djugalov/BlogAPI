@@ -30,6 +30,7 @@ namespace Blog.Web
             services.AddControllers();
             services.AddMediatR(typeof(Web.Controllers.CategoryController));
             services.AddProjectServices();
+            services.AddHttpContextAccessor();
             services.Configure<AppSettings>(Configuration.GetSection(AppSettings.Settings));
             services.AddSwaggerGen(c =>
             {
