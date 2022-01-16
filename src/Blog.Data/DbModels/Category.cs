@@ -11,7 +11,7 @@ namespace Blog.Data.DbModels
     {
         public Category()
         {
-            Posts = new HashSet<Post>();
+            Posts = new HashSet<CategoryPostMap>();
         }
 
         [Key]
@@ -21,6 +21,6 @@ namespace Blog.Data.DbModels
         [Column("name")]
         public string Name { get; set; }
 
-        public virtual IEnumerable<Post> Posts { get; set; }
+        public virtual IEnumerable<CategoryPostMap> Posts { get; set; }
     }
 }
