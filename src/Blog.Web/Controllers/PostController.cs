@@ -35,7 +35,7 @@ namespace Blog.Web.Controllers
             return Ok(response);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreatePost([FromBody] CreatePostRequest request)
         {
@@ -44,7 +44,7 @@ namespace Blog.Web.Controllers
             return Ok(response);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> DeletePost([FromBody] DeletePostRequest request)
         {
