@@ -2,12 +2,14 @@
 using Blog.BL.Authorization.Contracts;
 using Blog.BL.Commands.ApplicationUser;
 using Blog.BL.Commands.Category;
+using Blog.BL.Commands.Comment;
 using Blog.BL.Commands.Post;
 using Blog.BL.Helpers;
 using Blog.BL.Queries.Category;
 using Blog.BL.Queries.Post;
 using Blog.Models.Responses.ApplicationUser;
 using Blog.Models.Responses.Category;
+using Blog.Models.Responses.Comment;
 using Blog.Models.Responses.Post;
 using MediatR;
 
@@ -26,6 +28,8 @@ namespace Microsoft.Extensions.DependencyInjection
             AddApplicationUserServices(services);
 
             AddAutorizationServices(services);
+
+            AddCommentServices(services);
 
             return services;
         }
@@ -61,6 +65,11 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void AddAutorizationServices(IServiceCollection services)
         {
             services.AddTransient<IJwtTokenProvider, JwtTokenProvider>();
+        }
+
+        private static void AddCommentServices(IServiceCollection services)
+        {
+            services.AddTransient<IRequestHandler<CreateCommentCommand, CreateCommentResponse>, CreateCommentCommandHandler>();
         }
     }
 }
