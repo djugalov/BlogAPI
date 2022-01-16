@@ -7,6 +7,7 @@ using Blog.BL.Commands.Post;
 using Blog.BL.Helpers;
 using Blog.BL.Queries.Category;
 using Blog.BL.Queries.Post;
+using Blog.Models.Requests.Post;
 using Blog.Models.Responses.ApplicationUser;
 using Blog.Models.Responses.Category;
 using Blog.Models.Responses.Comment;
@@ -71,6 +72,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddTransient<IRequestHandler<CreateCommentCommand, CreateCommentResponse>, CreateCommentCommandHandler>();
             services.AddTransient<IRequestHandler<DeleteCommentCommand, DeleteCommentResponse>, DeleteCommentCommandHandler>();
+            services.AddTransient<IRequestHandler<EditCommentCommand, EditCommentResponse>, EditCommentCommandHandler>();
         }
     }
 }

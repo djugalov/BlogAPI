@@ -26,6 +26,15 @@ namespace Blog.Web.Controllers
             return Ok(response);
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> EditComment(EditCommentRequest request)
+        {
+            var response = await _mediator.Send(new EditCommentCommand(request));
+
+            return Ok(response);
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> DeleteComment(DeleteCommentRequest request)
