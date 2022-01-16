@@ -70,6 +70,7 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void AddCommentServices(IServiceCollection services)
         {
             services.AddTransient<IRequestHandler<CreateCommentCommand, CreateCommentResponse>, CreateCommentCommandHandler>();
+            services.AddTransient<IRequestHandler<DeleteCommentCommand, DeleteCommentResponse>, DeleteCommentCommandHandler>();
         }
     }
 }

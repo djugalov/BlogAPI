@@ -25,5 +25,14 @@ namespace Blog.Web.Controllers
 
             return Ok(response);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteComment(DeleteCommentRequest request)
+        {
+            var response = await _mediator.Send(new DeleteCommentCommand(request));
+
+            return Ok(response);
+        }
     }
 }
