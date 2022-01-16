@@ -4,11 +4,13 @@ using Blog.BL.Commands.ApplicationUser;
 using Blog.BL.Commands.Category;
 using Blog.BL.Commands.Comment;
 using Blog.BL.Commands.Post;
+using Blog.BL.Commands.Tag;
 using Blog.BL.Helpers;
 using Blog.BL.Queries.Category;
 using Blog.BL.Queries.Comment;
 using Blog.BL.Queries.Post;
 using Blog.BL.Queries.Tag;
+using Blog.Models.DTOs.Tag;
 using Blog.Models.Requests.Post;
 using Blog.Models.Responses.ApplicationUser;
 using Blog.Models.Responses.Category;
@@ -85,6 +87,9 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void AddTagServices(IServiceCollection services)
         {
             services.AddTransient<IRequestHandler<GetAllTagsQuery, GetAllTagsResponse>, GetAllTagsQueryHandler>();
+            services.AddTransient<IRequestHandler<DeleteTagCommand, DeleteTagResponse>, DeleteTagCommandHandler>();
+            services.AddTransient<IRequestHandler<CreateTagCommand, CreateTagResponse>, CreateTagCommandHandler>();
+            services.AddTransient<IRequestHandler<RemoveTagFromPostCommand, RemoveTagFromPostResponse>, RemoveTagFromPostCommandHandler>();
         }
     }
 }

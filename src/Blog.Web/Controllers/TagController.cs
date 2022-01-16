@@ -1,4 +1,7 @@
-﻿using MediatR;
+﻿using Blog.BL.Commands.Tag;
+using Blog.BL.Queries.Tag;
+using Blog.Models.Requests.Tag;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -18,31 +21,41 @@ namespace Blog.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllTags()
         {
-            return Ok();
+            var response = await _mediator.Send(new GetAllTagsQuery());
+
+            return Ok(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTag()
+        public async Task<IActionResult> CreateTag(CreateTagRequest request)
         {
-            return Ok();
+            var response = await _mediator.Send(new CreateTagCommand(request));
+
+            return Ok(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ApplyTagsToPost()
+        public async Task<IActionResult> ApplyTagsToPost(ApplyTagsToPostRequest request)
         {
-            return Ok();
+            var response = await _mediator.Send(new ApplyTagsToPostCommand(request));
+
+            return Ok(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> RemoveTagFromPost()
+        public async Task<IActionResult> RemoveTagFromPost(RemoveTagFromPostRequest request)
         {
-            return Ok();
+            var response = await _mediator.Send(new RemoveTagFromPostCommand(request));
+            
+            return Ok(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteTag()
+        public async Task<IActionResult> DeleteTag(DeleteTagRequest request)
         {
-            return Ok();
+            var response = await _mediator.Send(new DeleteTagCommand(request));
+
+            return Ok(response);
         }
     }
 }
