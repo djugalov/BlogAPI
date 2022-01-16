@@ -8,12 +8,8 @@ using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 using Blog.BL.Helpers;
-using System.IdentityModel.Tokens.Jwt;
 using Blog.Web.Infrastructure;
 using System.Collections.Generic;
-using System.Reflection;
-using System.IO;
-using System;
 
 namespace Blog.Web
 {
