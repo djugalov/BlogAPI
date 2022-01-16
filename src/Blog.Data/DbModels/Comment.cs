@@ -21,5 +21,8 @@ namespace Blog.Data.DbModels
 
         [Column("downvotes")]
         public int Downvotes { get; set; }
+
+        [ForeignKey("post_id")]
+        public virtual Post Post { get; set; }
     }
 }
