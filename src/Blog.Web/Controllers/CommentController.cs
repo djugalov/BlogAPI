@@ -27,7 +27,7 @@ namespace Blog.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCommentById(GetCommentByIdRequest request)
+        public async Task<IActionResult> GetCommentById([FromQuery] GetCommentByIdRequest request)
         {
             var response = await _mediator.Send(new GetCommentByIdQuery(request));
 
