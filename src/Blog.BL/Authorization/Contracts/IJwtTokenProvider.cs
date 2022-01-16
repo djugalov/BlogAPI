@@ -1,4 +1,5 @@
 ﻿using Blog.Data.DbModels;
+using Blog.Models.DTOs.ApplicationUser;
 using System;
 
 namespace Blog.BL.Authorization.Contracts
@@ -7,6 +8,6 @@ namespace Blog.BL.Authorization.Contracts
     {
         public string GenerateToken(ApplicationUser user);
 
-        public string ValidateToken(string token);
+        public JwtValidationDto ValidateToken(string token);
     }
 }

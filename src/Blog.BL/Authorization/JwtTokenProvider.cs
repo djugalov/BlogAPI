@@ -1,6 +1,7 @@
 ﻿using Blog.BL.Authorization.Contracts;
 using Blog.BL.Helpers;
 using Blog.Data.DbModels;
+using Blog.Models.DTOs.ApplicationUser;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -27,7 +28,7 @@ namespace Blog.BL.Authorization
 
             var securityTokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()), new Claim("role", user.Role) }),
                 Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenGenerationKey), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -39,7 +40,7 @@ namespace Blog.BL.Authorization
             return serializedToken;
         }
 
-        public string ValidateToken(string token)
+        public JwtValidationDto ValidateToken(string token)
         {
             if (token == null)
             {
@@ -62,8 +63,15 @@ namespace Blog.BL.Authorization
                 }, out SecurityToken validatedToken);
 
                 var userId = ((JwtSecurityToken)validatedToken).Claims.First(x => x.Type == "id").Value;
+                var role = ((JwtSecurityToken)validatedToken).Claims.First(x => x.Type == "role").Value;
 
-                return userId;
+                var validateTokenResponse = new JwtValidationDto
+                {
+                    UserId = userId,
+                    Role = role
+                };
+
+                return validateTokenResponse;
             }
             catch
             {
