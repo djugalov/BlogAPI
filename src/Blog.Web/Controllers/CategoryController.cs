@@ -24,6 +24,11 @@ namespace Blog.Web.Controllers
         {
             var response = await _mediator.Send(new GetCategoryByIdQuery(id));
 
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
+
             return Ok(response);
         }
 
@@ -50,6 +55,11 @@ namespace Blog.Web.Controllers
         {
             var response = await _mediator.Send(new DeleteCategoryCommand(request));
 
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
+
             return Ok(response);
         }
 
@@ -58,6 +68,11 @@ namespace Blog.Web.Controllers
         public async Task<IActionResult> EditCategory([FromBody] EditCategoryRequest request)
         {
             var response = await _mediator.Send(new EditCategoryCommand(request));
+
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
 
             return Ok(response);
         }

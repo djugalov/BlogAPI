@@ -23,6 +23,11 @@ namespace Blog.Web.Controllers
         {
             var response = await _mediator.Send(new GetAllTagsPerPostQuery(request));
 
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
+
             return Ok(response);
         }
 
@@ -47,6 +52,11 @@ namespace Blog.Web.Controllers
         {
             var response = await _mediator.Send(new ApplyTagsToPostCommand(request));
 
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
+
             return Ok(response);
         }
 
@@ -54,6 +64,11 @@ namespace Blog.Web.Controllers
         public async Task<IActionResult> RemoveTagFromPost(RemoveTagFromPostRequest request)
         {
             var response = await _mediator.Send(new RemoveTagFromPostCommand(request));
+
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
             
             return Ok(response);
         }
@@ -62,6 +77,11 @@ namespace Blog.Web.Controllers
         public async Task<IActionResult> DeleteTag(DeleteTagRequest request)
         {
             var response = await _mediator.Send(new DeleteTagCommand(request));
+
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
 
             return Ok(response);
         }

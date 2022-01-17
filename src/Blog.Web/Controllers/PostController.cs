@@ -24,6 +24,11 @@ namespace Blog.Web.Controllers
         {
             var response = await _mediator.Send(new GetPostByIdQuery(request));
 
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
+
             return Ok(response);
         }
 
@@ -41,6 +46,11 @@ namespace Blog.Web.Controllers
         {
             var response = await _mediator.Send(new CreatePostCommand(request));
 
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
+
             return Ok(response);
         }
 
@@ -49,6 +59,11 @@ namespace Blog.Web.Controllers
         public async Task<IActionResult> DeletePost([FromBody] DeletePostRequest request)
         {
             var response = await _mediator.Send(new DeletePostCommand(request));
+
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
 
             return Ok(response);
         }

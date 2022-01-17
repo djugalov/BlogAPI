@@ -21,14 +21,23 @@ namespace Blog.Web.Controllers
         {
             var response = await _mediator.Send(new RegisterUserCommand(request));
 
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
+
             return Ok(response);
         }
 
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginUserRequest request)
         {
-            //Testy/Test123!
             var response = await _mediator.Send(new LoginUserCommand(request));
+
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
 
             return Ok(response);
         }
