@@ -4,6 +4,7 @@ using Blog.BL.Queries.Comment;
 using Blog.Models.Requests.Comment;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace Blog.Web.Controllers
@@ -13,9 +14,11 @@ namespace Blog.Web.Controllers
     public class CommentController : Controller
     {
         private readonly IMediator _mediator;
-        public CommentController(IMediator mediator)
+        private readonly ILogger<CommentController> _logger;
+        public CommentController(IMediator mediator, ILogger<CommentController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -25,6 +28,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Comment]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
@@ -38,6 +43,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Comment]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
@@ -52,6 +59,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Comment]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
@@ -66,6 +75,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Comment]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
@@ -80,6 +91,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Comment]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 

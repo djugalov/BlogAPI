@@ -2,6 +2,7 @@
 using Blog.Models.Requests.ApplicationUser;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace Blog.Web.Controllers
@@ -11,9 +12,11 @@ namespace Blog.Web.Controllers
     public class ApplicationUserController : Controller
     {
         private readonly IMediator _mediator;
-        public ApplicationUserController(IMediator mediator)
+        private readonly ILogger<ApplicationUserController> _logger;
+        public ApplicationUserController(IMediator mediator, ILogger<ApplicationUserController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -23,6 +26,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Login]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
@@ -36,6 +41,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Login]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 

@@ -4,6 +4,7 @@ using Blog.BL.Queries.Post;
 using Blog.Models.Requests.Post;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace Blog.Web.Controllers
@@ -13,10 +14,12 @@ namespace Blog.Web.Controllers
     public class PostController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly ILogger<PostController> _logger;
 
-        public PostController(IMediator mediator)
+        public PostController(IMediator mediator, ILogger<PostController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -26,6 +29,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Post]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
@@ -48,6 +53,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Post]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
@@ -62,6 +69,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Post]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 

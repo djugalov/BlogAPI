@@ -4,6 +4,7 @@ using Blog.BL.Queries.Category;
 using Blog.Models.Requests.Category;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -14,9 +15,11 @@ namespace Blog.Web.Controllers
     public class CategoryController : Controller
     {
         private readonly IMediator _mediator;
-        public CategoryController(IMediator mediator)
+        private readonly ILogger<CategoryController> _logger;
+        public CategoryController(IMediator mediator, ILogger<CategoryController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -26,6 +29,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Category]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
@@ -57,6 +62,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Category]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
@@ -71,6 +78,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Category]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 

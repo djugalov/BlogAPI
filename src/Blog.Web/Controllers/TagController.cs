@@ -3,6 +3,7 @@ using Blog.BL.Queries.Tag;
 using Blog.Models.Requests.Tag;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace Blog.Web.Controllers
@@ -12,10 +13,12 @@ namespace Blog.Web.Controllers
     public class TagController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly ILogger<TagController> _logger;
 
-        public TagController(IMediator mediator)
+        public TagController(IMediator mediator, ILogger<TagController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -25,6 +28,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Tag]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
@@ -54,6 +59,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Tag]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
@@ -67,6 +74,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Tag]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
             
@@ -80,6 +89,8 @@ namespace Blog.Web.Controllers
 
             if (!response.IsSuccess)
             {
+                _logger.LogError($"[BlogAPI/Tag]: {response.ResponseMessage}");
+
                 return BadRequest(response);
             }
 
