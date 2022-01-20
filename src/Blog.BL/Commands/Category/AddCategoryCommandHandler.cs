@@ -1,6 +1,7 @@
 ﻿using Blog.Data;
 using Blog.Models.Responses.Category;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,18 +17,29 @@ namespace Blog.BL.Commands.Category
 
         public async Task<AddCategoryResponse> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
         {
-            var category = await _context.Categories.AddAsync(new Data.DbModels.Category
+            try
             {
-                Name = request.Category.Name
-            });
+                var category = await _context.Categories.AddAsync(new Data.DbModels.Category
+                {
+                    Name = request.Category.Name
+                }, CancellationToken.None);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(CancellationToken.None);
 
-            return new AddCategoryResponse
+                return new AddCategoryResponse
+                {
+                    Id = category.Entity.Id,
+                    Name = category.Entity.Name
+                };
+            }
+            catch (DbUpdateException)
             {
-                Id = category.Entity.Id,
-                Name = category.Entity.Name
-            };
+                return new AddCategoryResponse
+                {
+                    IsSuccess = false,
+                    ResponseMessage = "Category with the same name already exist"
+                };
+            }
         }
     }
 }
