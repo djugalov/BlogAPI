@@ -51,6 +51,13 @@ namespace Blog.Web.Controllers
         {
             var response = await _mediator.Send(new AddCategoryCommand(request));
 
+            if (!response.IsSuccess)
+            {
+                _logger.LogError($"[BlogAPI/Category]: {response.ResponseMessage}");
+
+                return BadRequest(response);
+            }
+
             return Ok(response);
         }
 
