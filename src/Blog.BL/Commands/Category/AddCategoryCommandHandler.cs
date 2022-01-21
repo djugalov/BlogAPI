@@ -28,6 +28,8 @@ namespace Blog.BL.Commands.Category
 
                 return new AddCategoryResponse
                 {
+                    IsSuccess = true,
+                    ResponseMessage = "Category was added successfully",
                     Id = category.Entity.Id,
                     Name = category.Entity.Name
                 };
