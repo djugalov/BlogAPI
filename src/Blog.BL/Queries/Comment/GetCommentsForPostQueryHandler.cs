@@ -18,7 +18,7 @@ namespace Blog.BL.Queries.Comment
         }
         public async Task<GetCommentsForPostResponse> Handle(GetCommentsForPostQuery getCommentsForPostQuery, CancellationToken cancellationToken)
         {
-            var post = await _context.Posts.FirstOrDefaultAsync(x => x.Id == getCommentsForPostQuery.Request.PostId);
+            var post = await _context.Posts.FirstOrDefaultAsync(x => x.Id == getCommentsForPostQuery.Request.PostId, CancellationToken.None);
 
             if (post == null)
             {
@@ -39,7 +39,7 @@ namespace Blog.BL.Queries.Comment
                     Downvotes = x.Downvotes,
                     PostId = x.Post.Id
                 })
-                .ToListAsync();
+                .ToListAsync(CancellationToken.None);
 
             return new GetCommentsForPostResponse
             {

@@ -53,7 +53,7 @@ namespace Blog.BL.Commands.Comment
 
             await _context.Comments.AddAsync(comment, CancellationToken.None);
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(CancellationToken.None);
 
             response.IsSuccess = true;
             response.ResponseMessage = "Comment was added successfully";
